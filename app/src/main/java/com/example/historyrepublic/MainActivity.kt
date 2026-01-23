@@ -10,10 +10,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.historyrepublic.domain.Hero
 import com.example.historyrepublic.ui.herolist.HeroListScreen
+import com.example.historyrepublic.ui.herolist.HeroListState
 import com.example.historyrepublic.ui.herolist.HeroListViewModel
 import com.example.historyrepublic.ui.theme.HistoryRepublicTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,12 +34,27 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HistoryRepublicTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HeroListScreen(heroListViewModel.heros, modifier = Modifier.padding(innerPadding))
+                var navcontroller = rememberNavController()
+                NavHost(navController = navcontroller, startDestination = "herolist") {
+                    composable("herolist") {
+                        HeroListScreen()
+                    }
                 }
             }
         }
     }
 }
 
-private fun generateHeros() = (0 until 10).map { Hero("id$it", "Name$it", "Title$it", "Information$it","image$it", "Url$it") }
+@Composable
+private fun MainScreen(heroListViewModel: HeroListViewModel) {
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        val state by heroListViewModel.state.collectAsState()
+        when (state) {
+            is HeroListState.Success -> {
+                HeroListScreen((state as HeroListState.Success).heros, modifier = Modifier.padding(innerPadding))
+            }
+            else -> {}
+        }
+
+    }
+}

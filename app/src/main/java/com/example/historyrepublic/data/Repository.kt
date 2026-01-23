@@ -1,5 +1,7 @@
 package com.example.historyrepublic.data
 
+import com.example.historyrepublic.domain.Hero
+
 interface Repository {
-    //fun getHeroes()
+    suspend fun getHeroes(): List<Hero>
 }

@@ -85,6 +85,12 @@ dependencies {
     testImplementation("androidx.arch.core:core-testing:2.2.0")
 
 
+    // Navigation
+    val nav_version = "2.9.6"
+
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
+
 
     // For Robolectric tests.
     testImplementation("com.google.dagger:hilt-android-testing:2.57.2")

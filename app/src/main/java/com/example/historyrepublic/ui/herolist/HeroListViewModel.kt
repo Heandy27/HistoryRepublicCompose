@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.Dispatcher
@@ -18,21 +19,31 @@ import javax.inject.Inject
 @HiltViewModel
 class HeroListViewModel @Inject constructor(
     private val repository: Repository,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): ViewModel() {
-    val heros = generateHeros()
 
     private val _state: MutableStateFlow<HeroListState> = MutableStateFlow(HeroListState.Loading)
     val state: StateFlow<HeroListState> = _state.asStateFlow()
 
+    init {
+        getHeros()
+    }
+
     fun getHeros() {
         viewModelScope.launch {
-            val result = withContext(dispatcher) {
+            _state.update { HeroListState.Loading }
 
+            val result = runCatching {
+                withContext(Dispatchers.IO) {
+                    repository.getHeroes()
+                }
             }
+            if (result.isSuccess) {
+                _state.update { HeroListState.Success(result.getOrThrow()) }
+            } else {
+                _state.update { HeroListState.Error(result.exceptionOrNull()?.message.orEmpty()) }
+            }
+
         }
     }
 
 }
-
-private fun generateHeros() = (0 until 10).map { Hero("id$it", "Name$it", "Title$it", "Information$it","image$it", "Url$it") }
