@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                 var navcontroller = rememberNavController()
                 NavHost(navController = navcontroller, startDestination = "herolist") {
                     composable("herolist") {
-                        HeroListScreen()
+                       MainScreen(heroListViewModel)
                     }
                 }
             }
