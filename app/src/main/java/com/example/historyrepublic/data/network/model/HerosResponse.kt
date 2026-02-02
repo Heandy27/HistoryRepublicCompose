@@ -2,7 +2,7 @@ package com.example.historyrepublic.data.network.model
 
 import com.example.historyrepublic.data.local.model.HeroLocal
 
-data class HeroResponse(
+data class HerosResponse(
     val id: String,
     val nameHero: String,
     val title: String,
@@ -11,10 +11,10 @@ data class HeroResponse(
     val url: String
 )
 
-fun List<HeroResponse>.toLocal(): List<HeroLocal> = this.map {
+fun List<HerosResponse>.toLocal(): List<HeroLocal> = this.map {
     it.toLocal()
 }
 
-fun HeroResponse.toLocal(): HeroLocal = with(this) {
+fun HerosResponse.toLocal(): HeroLocal = with(this) {
     HeroLocal(id, nameHero, title, information, image, url)
 }

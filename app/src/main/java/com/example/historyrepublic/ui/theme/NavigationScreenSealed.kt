@@ -2,11 +2,12 @@ package com.example.historyrepublic.ui.theme
 
 sealed class NavigationScreenSealed(val route: String) {
 
-    object Screen1 : NavigationScreenSealed("Screen1")
-    object Screen2 : NavigationScreenSealed("Screen2")
+    object HeroList : NavigationScreenSealed("heroList")
+    object HeroDetail : NavigationScreenSealed("heroDetail/{heroId}") {
 
-    object Screen3 : NavigationScreenSealed("Screen3") {
-        fun createRoute(age: Int) = "pantalla/$age"
+        fun createRoute(heroId: String): String {
+            return "heroDetail/$heroId"
+        }
     }
 }
 
