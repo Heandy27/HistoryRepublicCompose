@@ -5,9 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,6 +35,8 @@ import com.example.historyrepublic.ui.theme.HistoryRepublicTheme
 import com.example.historyrepublic.ui.theme.NavigationScreenSealed
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.dp
 
 
 @AndroidEntryPoint
@@ -86,6 +94,9 @@ private fun MainScreen(
         val state by heroListViewModel.state.collectAsState()
 
         when (state) {
+            is UIState.Loading -> {
+                Box(modifier = Modifier.fillMaxSize(), Alignment.Center) { CircularProgressIndicator() }
+            }
 
             is UIState.Success -> {
                 HeroListScreen(
@@ -99,7 +110,20 @@ private fun MainScreen(
                 )
             }
 
-            else -> {}
+            is UIState.Error -> {
+                Box(modifier = Modifier.fillMaxSize(), Alignment.Center) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+                        Text("❌ Error loading heroes")
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Button(onClick = { heroListViewModel.getHeros() }) {
+                            Text("Retry")
+                        }
+                    }
+                }
+            }
         }
     }
 }
