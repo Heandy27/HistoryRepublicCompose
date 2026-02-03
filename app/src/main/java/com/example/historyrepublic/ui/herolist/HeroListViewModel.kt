@@ -8,8 +8,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,20 +24,46 @@ class HeroListViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    private val _state =
+    // ✅ Lista original
+    private val _heroes =
+        MutableStateFlow<List<Hero>>(emptyList())
+
+
+    // ✅ Texto buscado
+    private val _searchQuery =
+        MutableStateFlow("")
+
+    // ✅ Estado UI final (filtrado)
+    val state: StateFlow<UIState<List<Hero>>> =
+        combine(_heroes, _searchQuery) { heroes, query ->
+
+            val filteredHeroes = heroes.filter {
+                it.nameHero.contains(query, ignoreCase = true)
+            }
+
+            UIState.Success(filteredHeroes)
+
+        }.stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            UIState.Loading
+        )
+
+    // ✅ Loading y Error aparte
+    private val _uiState =
         MutableStateFlow<UIState<List<Hero>>>(UIState.Loading)
 
-    val state: StateFlow<UIState<List<Hero>>> =
-        _state.asStateFlow()
+//    val state: StateFlow<UIState<List<Hero>>> =
+//        _state.asStateFlow()
 
     init {
-        getHeros()
+        getHeroes()
     }
 
-    fun getHeros() {
+    fun getHeroes() {
         viewModelScope.launch {
 
-            _state.value = UIState.Loading
+            _uiState.value = UIState.Loading
 
             val result = runCatching {
                 withContext(Dispatchers.IO) {
@@ -43,13 +72,24 @@ class HeroListViewModel @Inject constructor(
             }
 
             result.onSuccess { heroes ->
-                _state.value = UIState.Success(heroes)
+                _heroes.value = heroes
+                _uiState.value = UIState.Success(heroes)
             }
 
             result.onFailure { error ->
-                _state.value = UIState.Error(error.message ?: "Unknown error")
+                _uiState.value =
+                    UIState.Error(error.message ?: "Unknown error")
             }
         }
+    }
+
+    // ✅ UI llama esto cuando escriben en search
+    fun updateSearch(query: String) {
+        _searchQuery.value = query
+    }
+
+    fun clearSearch() {
+        _searchQuery.value = ""
     }
 }
 
