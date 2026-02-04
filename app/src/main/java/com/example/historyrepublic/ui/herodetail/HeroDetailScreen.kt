@@ -1,4 +1,4 @@
-package com.example.historyrepublic.ui.heroviews
+package com.example.historyrepublic.ui.herodetail
 
 import android.webkit.WebView
 import androidx.compose.foundation.layout.Box
@@ -20,13 +20,15 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.historyrepublic.domain.HeroDetail
+import com.example.historyrepublic.ui.heroviews.HeroListViewModel
+import com.example.historyrepublic.ui.heroviews.UIState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HeroDetailScreen(
     heroId: String,
     navcontroller: NavHostController,
-    viewModel: HeroListViewModel = hiltViewModel()
+    viewModel: HeroDetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.stateDetail.collectAsState()
 

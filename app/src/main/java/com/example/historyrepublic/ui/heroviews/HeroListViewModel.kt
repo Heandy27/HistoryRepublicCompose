@@ -22,15 +22,6 @@ class HeroListViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-
-    // Detail Heroe
-
-    private val _stateDetail =
-        MutableStateFlow<UIState<HeroDetail>>(UIState.Loading)
-
-    val stateDetail: StateFlow<UIState<HeroDetail>> =
-        _stateDetail.asStateFlow()
-
     // ✅ Lista original
     private val _heroes =
         MutableStateFlow<List<Hero>>(emptyList())
@@ -60,9 +51,6 @@ class HeroListViewModel @Inject constructor(
     // ✅ Loading y Error aparte
     private val _uiState =
         MutableStateFlow<UIState<List<Hero>>>(UIState.Loading)
-
-//    val state: StateFlow<UIState<List<Hero>>> =
-//        _state.asStateFlow()
 
     init {
         getHeroes()
@@ -100,27 +88,5 @@ class HeroListViewModel @Inject constructor(
         _searchQuery.value = ""
     }
 
-
-    fun fetchHeroById(id: String) {
-        viewModelScope.launch {
-
-            _stateDetail.value = UIState.Loading
-
-            val result = runCatching {
-                withContext(Dispatchers.IO) {
-                    repository.fetchHeroById(id)
-                }
-            }
-
-            result.onSuccess { hero ->
-                _stateDetail.value = UIState.Success(hero)
-            }
-
-            result.onFailure { error ->
-                _stateDetail.value =
-                    UIState.Error(error.message ?: "Unknown error")
-            }
-        }
-    }
 }
 

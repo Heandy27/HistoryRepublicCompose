@@ -29,16 +29,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.historyrepublic.ui.heroviews.HeroDetailScreen
+import com.example.historyrepublic.ui.herodetail.HeroDetailScreen
 import com.example.historyrepublic.ui.heroviews.HeroListScreen
 import com.example.historyrepublic.ui.heroviews.HeroListViewModel
 import com.example.historyrepublic.ui.heroviews.UIState
 import com.example.historyrepublic.ui.theme.HistoryRepublicTheme
 import com.example.historyrepublic.ui.theme.NavigationScreenSealed
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.unit.dp
