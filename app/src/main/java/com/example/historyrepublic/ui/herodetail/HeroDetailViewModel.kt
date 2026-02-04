@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.historyrepublic.data.Repository
 import com.example.historyrepublic.domain.HeroDetail
-import com.example.historyrepublic.ui.heroviews.UIState
+import com.example.historyrepublic.ui.herolist.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

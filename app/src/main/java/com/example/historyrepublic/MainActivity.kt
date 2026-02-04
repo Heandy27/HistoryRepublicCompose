@@ -30,9 +30,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.historyrepublic.ui.herodetail.HeroDetailScreen
-import com.example.historyrepublic.ui.heroviews.HeroListScreen
-import com.example.historyrepublic.ui.heroviews.HeroListViewModel
-import com.example.historyrepublic.ui.heroviews.UIState
+import com.example.historyrepublic.ui.herolist.HeroListScreen
+import com.example.historyrepublic.ui.herolist.HeroListViewModel
+import com.example.historyrepublic.ui.herolist.UIState
 import com.example.historyrepublic.ui.theme.HistoryRepublicTheme
 import com.example.historyrepublic.ui.theme.NavigationScreenSealed
 import dagger.hilt.android.AndroidEntryPoint

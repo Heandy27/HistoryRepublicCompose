@@ -1,4 +1,4 @@
-package com.example.historyrepublic.ui.heroviews
+package com.example.historyrepublic.ui.herolist
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

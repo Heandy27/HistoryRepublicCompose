@@ -20,8 +20,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.historyrepublic.domain.HeroDetail
-import com.example.historyrepublic.ui.heroviews.HeroListViewModel
-import com.example.historyrepublic.ui.heroviews.UIState
+import com.example.historyrepublic.ui.herolist.UIState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

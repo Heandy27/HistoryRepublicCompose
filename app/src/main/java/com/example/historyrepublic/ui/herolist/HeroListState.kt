@@ -1,4 +1,4 @@
-package com.example.historyrepublic.ui.heroviews
+package com.example.historyrepublic.ui.herolist
 
 sealed class UIState<out T> {
 
