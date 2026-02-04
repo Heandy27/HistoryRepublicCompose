@@ -23,6 +23,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.historyrepublic.data.network.model.SingleHeroResponse
 import com.example.historyrepublic.domain.Hero
+import com.example.historyrepublic.domain.HeroDetail
+import com.example.historyrepublic.ui.herolist.HeroListViewModel
 import com.example.historyrepublic.ui.herolist.UIState
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,7 +32,7 @@ import com.example.historyrepublic.ui.herolist.UIState
 fun HeroDetailScreen(
     heroId: String,
     navcontroller: NavHostController,
-    viewModel: HeroDetailViewModel = hiltViewModel()
+    viewModel: HeroListViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -59,7 +61,7 @@ fun HeroDetailScreen(
 
             is UIState.Success -> {
 
-                val hero = (state as UIState.Success<SingleHeroResponse>).data
+                val hero = (state as UIState.Success<HeroDetail>).data
 
                 Column {
                     AndroidView(

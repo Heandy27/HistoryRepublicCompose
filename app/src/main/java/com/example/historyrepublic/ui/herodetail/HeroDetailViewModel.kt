@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.historyrepublic.data.Repository
 import com.example.historyrepublic.data.network.model.SingleHeroResponse
 import com.example.historyrepublic.domain.Hero
+import com.example.historyrepublic.domain.HeroDetail
 import com.example.historyrepublic.ui.herolist.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
@@ -21,9 +22,9 @@ class HeroDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state =
-        MutableStateFlow<UIState<SingleHeroResponse>>(UIState.Loading)
+        MutableStateFlow<UIState<HeroDetail>>(UIState.Loading)
 
-    val state: StateFlow<UIState<SingleHeroResponse>> =
+    val state: StateFlow<UIState<HeroDetail>> =
         _state.asStateFlow()
 
     fun fetchHeroById(id: String) {

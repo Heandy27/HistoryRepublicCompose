@@ -133,7 +133,7 @@ private fun MainScreen(
                     hero = (state as UIState.Success).data,
                     modifier = Modifier.padding(innerPadding),
                     onHeroClick = { heroId ->
-                        heroListViewModel.clearSearch()
+                       // heroListViewModel.clearSearch()
                         searchText = ""
                         navcontroller.navigate(
                             NavigationScreenSealed.HeroDetail.createRoute(heroId)

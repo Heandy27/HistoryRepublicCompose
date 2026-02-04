@@ -7,6 +7,8 @@ import com.example.historyrepublic.data.local.model.HeroLocal
 
 @Dao
 interface HeroDao {
+
+    // Heroes
     @Query("Select * from heros")
     fun getHeros(): List<HeroLocal>
 

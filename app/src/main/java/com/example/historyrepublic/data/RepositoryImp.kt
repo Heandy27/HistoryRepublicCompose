@@ -6,12 +6,14 @@ import com.example.historyrepublic.data.network.NetworkDataSource
 import com.example.historyrepublic.data.network.model.SingleHeroResponse
 import com.example.historyrepublic.data.network.model.toLocal
 import com.example.historyrepublic.domain.Hero
+import com.example.historyrepublic.domain.HeroDetail
 import javax.inject.Inject
 
 class RepositoryImp @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val networkDataSource: NetworkDataSource
 ): Repository {
+
     override suspend fun getHeroes(): List<Hero> {
         val localHeros = localDataSource.getHeros()
 
@@ -24,8 +26,15 @@ class RepositoryImp @Inject constructor(
 
     }
 
-    override suspend fun fetchHeroById(id: String): SingleHeroResponse {
-        return networkDataSource.fetchHeroById(id)
+    override suspend fun fetchHeroById(id: String): HeroDetail {
+       val localHeroDetail = localDataSource.getHeroDetail(id)
+
+        if( localHeroDetail == null) {
+            val remoteHeroDetail = networkDataSource.fetchHeroById(id)
+
+            localDataSource.insertHeroDetail(remoteHeroDetail.toLocal())
+        }
+        return localDataSource.getHeroDetail(id).toUI()
     }
 
 }

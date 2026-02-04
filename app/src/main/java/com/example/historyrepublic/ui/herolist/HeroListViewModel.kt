@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.historyrepublic.data.Repository
 import com.example.historyrepublic.domain.Hero
+import com.example.historyrepublic.domain.HeroDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,15 @@ import javax.inject.Inject
 class HeroListViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
+
+
+    // Detail Heroe
+
+    private val _stateDetail =
+        MutableStateFlow<UIState<HeroDetail>>(UIState.Loading)
+
+    val stateDetail: StateFlow<UIState<HeroDetail>> =
+        _stateDetail.asStateFlow()
 
     // ✅ Lista original
     private val _heroes =
@@ -90,6 +100,29 @@ class HeroListViewModel @Inject constructor(
 
     fun clearSearch() {
         _searchQuery.value = ""
+    }
+
+
+    fun fetchHeroById(id: String) {
+        viewModelScope.launch {
+
+            _stateDetail.value = UIState.Loading
+
+            val result = runCatching {
+                withContext(Dispatchers.IO) {
+                    repository.fetchHeroById(id)
+                }
+            }
+
+            result.onSuccess { hero ->
+                _stateDetail.value = UIState.Success(hero)
+            }
+
+            result.onFailure { error ->
+                _stateDetail.value =
+                    UIState.Error(error.message ?: "Unknown error")
+            }
+        }
     }
 }
 

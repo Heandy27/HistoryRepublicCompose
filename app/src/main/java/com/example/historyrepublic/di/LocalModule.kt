@@ -7,6 +7,7 @@ import com.example.historyrepublic.data.local.LocalDataSource
 import com.example.historyrepublic.data.local.LocalDataSourceImp
 import com.example.historyrepublic.data.local.db.HeroDao
 import com.example.historyrepublic.data.local.db.HeroDatabase
+import com.example.historyrepublic.data.local.db.HeroDetailDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,5 +37,10 @@ object LocalModule {
     @Provides
     fun provideLocalDataSource(localDataSourceImp: LocalDataSourceImp): LocalDataSource {
         return localDataSourceImp
+    }
+
+    @Provides
+    fun provideHeroDetailDao(db: HeroDatabase): HeroDetailDao {
+        return db.heroDetailDao()
     }
 }
