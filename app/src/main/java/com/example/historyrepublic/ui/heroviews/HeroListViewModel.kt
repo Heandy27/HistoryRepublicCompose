@@ -1,4 +1,4 @@
-package com.example.historyrepublic.ui.herolist
+package com.example.historyrepublic.ui.heroviews
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,7 +6,6 @@ import com.example.historyrepublic.data.Repository
 import com.example.historyrepublic.domain.Hero
 import com.example.historyrepublic.domain.HeroDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,10 +13,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,8 +37,9 @@ class HeroListViewModel @Inject constructor(
 
 
     // ✅ Texto buscado
-    private val _searchQuery =
-        MutableStateFlow("")
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> =
+        _searchQuery.asStateFlow()
 
     // ✅ Estado UI final (filtrado)
     val state: StateFlow<UIState<List<Hero>>> =

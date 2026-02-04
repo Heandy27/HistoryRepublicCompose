@@ -1,6 +1,4 @@
-package com.example.historyrepublic.ui.herolist
-
-import com.example.historyrepublic.domain.Hero
+package com.example.historyrepublic.ui.heroviews
 
 sealed class UIState<out T> {
 

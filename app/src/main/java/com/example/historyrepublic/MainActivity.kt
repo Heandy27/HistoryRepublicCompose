@@ -21,23 +21,21 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.historyrepublic.ui.herodetail.HeroDetailScreen
-import com.example.historyrepublic.ui.herolist.HeroListScreen
-import com.example.historyrepublic.ui.herolist.HeroListViewModel
-import com.example.historyrepublic.ui.herolist.UIState
+import com.example.historyrepublic.ui.heroviews.HeroDetailScreen
+import com.example.historyrepublic.ui.heroviews.HeroListScreen
+import com.example.historyrepublic.ui.heroviews.HeroListViewModel
+import com.example.historyrepublic.ui.heroviews.UIState
 import com.example.historyrepublic.ui.theme.HistoryRepublicTheme
 import com.example.historyrepublic.ui.theme.NavigationScreenSealed
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -83,7 +81,15 @@ private fun MainScreen(
 ) {
     val state by heroListViewModel.state.collectAsState()
     // ✅ Texto que escribe el usuario
-    var searchText by remember { mutableStateOf("") }
+    val searchText by heroListViewModel.searchQuery.collectAsState()
+
+    DisposableEffect(Unit) {
+
+        onDispose {
+            // ✅ Esto se ejecuta cuando sales de la pantalla lista
+            heroListViewModel.clearSearch()
+        }
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -104,7 +110,6 @@ private fun MainScreen(
                 TextField(
                     value = searchText,
                     onValueChange = {
-                        searchText = it
                         heroListViewModel.updateSearch(it)
                                     },
                     placeholder = { Text("Search...") },
@@ -133,8 +138,6 @@ private fun MainScreen(
                     hero = (state as UIState.Success).data,
                     modifier = Modifier.padding(innerPadding),
                     onHeroClick = { heroId ->
-                       // heroListViewModel.clearSearch()
-                        searchText = ""
                         navcontroller.navigate(
                             NavigationScreenSealed.HeroDetail.createRoute(heroId)
                         )

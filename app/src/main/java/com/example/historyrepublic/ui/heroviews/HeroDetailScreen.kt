@@ -1,7 +1,6 @@
-package com.example.historyrepublic.ui.herodetail
+package com.example.historyrepublic.ui.heroviews
 
 import android.webkit.WebView
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,14 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import coil3.compose.AsyncImage
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.historyrepublic.data.network.model.SingleHeroResponse
-import com.example.historyrepublic.domain.Hero
 import com.example.historyrepublic.domain.HeroDetail
-import com.example.historyrepublic.ui.herolist.HeroListViewModel
-import com.example.historyrepublic.ui.herolist.UIState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,7 +28,7 @@ fun HeroDetailScreen(
     navcontroller: NavHostController,
     viewModel: HeroListViewModel = hiltViewModel()
 ) {
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.stateDetail.collectAsState()
 
     LaunchedEffect(heroId) {
         viewModel.fetchHeroById(heroId)
@@ -45,7 +39,9 @@ fun HeroDetailScreen(
             TopAppBar(
                 title = {  },
                 navigationIcon = {
-                    Button(onClick = { navcontroller.popBackStack() }) {
+                    Button(onClick = {
+                        navcontroller.popBackStack()
+                    }) {
                         Text("Back")
                     }
                 }
