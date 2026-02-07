@@ -1,6 +1,6 @@
 # History Republic
 
-**History Republic** is a mobile app built with SwiftUI that brings the past to life by showcasing influential historical figures and their legacies.
+**History Republic** is an Android app built with Jetpack Compose that brings the past to life by showcasing influential historical figures and their legacies.
 <div style="display: flex; justify-content: center; align-items: center;">
 <img src="https://i.postimg.cc/T1Z7fr3M/Chat_GPT_Image_Feb_6_2026_07_53_46_PM.png" alt="map" width="200">
 <img src="https://i.postimg.cc/qqtbPm4k/Chat_GPT_Image_Feb_6_2026_07_52_30_PM.png" alt="map" width="200">
