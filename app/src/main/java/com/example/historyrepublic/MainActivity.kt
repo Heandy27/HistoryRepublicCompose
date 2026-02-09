@@ -39,6 +39,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 
 
 @AndroidEntryPoint
@@ -55,7 +56,7 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController = navcontroller, startDestination = NavigationScreenSealed.HeroList.route) {
                     // Pantalla Lista
                     composable(NavigationScreenSealed.HeroList.route) {
-                        MainScreen(heroListViewModel, navcontroller)
+                        MainScreen(navcontroller)
                     }
                     // Pantalla detalle
                     composable(NavigationScreenSealed.HeroDetail.route) { backStackEntry ->
@@ -73,8 +74,8 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainScreen(
-    heroListViewModel: HeroListViewModel,
-    navcontroller: NavHostController
+    navcontroller: NavHostController,
+    heroListViewModel: HeroListViewModel = hiltViewModel()
 ) {
     val state by heroListViewModel.state.collectAsState()
     // ✅ Texto que escribe el usuario
