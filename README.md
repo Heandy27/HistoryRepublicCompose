@@ -16,7 +16,7 @@
 - **Heroes List:** Browse a curated list of historical heroes from around the world.
 - **Search:** Find heroes by name (and optionally filter/sort).
 - **Hero Details:** Dedicated detail screen (supports rich content and external links).
-- **Offline Support (Room):** Persist favorites (and optionally cached heroes) on device.
+- **Offline Support (Room):** Persist heroes on device.
 - **Modern Navigation (NavHost):** Smooth navigation between screens in Compose.
 - **MVVM:** Clear separation of UI, state, and business logic.
 - **Dependency Injection (Hilt):** Clean, scalable DI setup.
