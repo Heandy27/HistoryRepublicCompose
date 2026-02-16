@@ -1,4 +1,4 @@
-# History Republic
+# History Republic - Android App (Jetpack Compose)
 
 **History Republic** is an Android app built with Jetpack Compose that brings the past to life by showcasing influential historical figures and their legacies.
 
