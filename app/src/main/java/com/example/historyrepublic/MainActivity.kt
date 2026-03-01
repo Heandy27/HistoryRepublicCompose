@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,6 +41,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.historyrepublic.ui.MainRoot
+import com.example.historyrepublic.ui.theme.BottomBarScreenSealed
 
 
 @AndroidEntryPoint
@@ -52,20 +55,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HistoryRepublicTheme {
-                var navcontroller = rememberNavController()
-                NavHost(navController = navcontroller, startDestination = NavigationScreenSealed.HeroList.route) {
-                    // Pantalla Lista
-                    composable(NavigationScreenSealed.HeroList.route) {
-                        MainScreen(navcontroller)
-                    }
-                    // Pantalla detalle
-                    composable(NavigationScreenSealed.HeroDetail.route) { backStackEntry ->
-
-                        val heroId = backStackEntry.arguments?.getString("heroId") ?: ""
-
-                        HeroDetailScreen(heroId, navcontroller)
-                    }
-                }
+                MainRoot()
             }
         }
     }
@@ -73,7 +63,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MainScreen(
+fun MainScreen(
     navcontroller: NavHostController,
     heroListViewModel: HeroListViewModel = hiltViewModel()
 ) {

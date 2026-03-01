@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
 
     // Retrofit
@@ -92,6 +93,7 @@ dependencies {
     val nav_version = "2.9.6"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
 
 
 

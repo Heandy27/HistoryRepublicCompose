@@ -1,5 +1,11 @@
 package com.example.historyrepublic.ui.theme
 
+import android.graphics.drawable.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.ui.graphics.vector.ImageVector
+
 sealed class NavigationScreenSealed(val route: String) {
 
     object HeroList : NavigationScreenSealed("heroList")
@@ -10,6 +16,7 @@ sealed class NavigationScreenSealed(val route: String) {
         }
     }
 }
+
 
 
 //sealed class NavigationScreenSealed(val route: String) {
