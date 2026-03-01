@@ -18,5 +18,5 @@ fun List<HerosResponse>.toLocal(): List<HeroLocal> = this.map {
 }
 
 fun HerosResponse.toLocal(): HeroLocal = with(this) {
-    HeroLocal(id, nameHero, title, information, image, url, longitude, latitude)
+    HeroLocal(id, nameHero, title, information, image, url, latitude, longitude)
 }

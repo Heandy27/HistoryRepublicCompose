@@ -8,7 +8,7 @@ import com.example.historyrepublic.data.local.model.HeroLocal
 @Database(entities = [
     HeroLocal::class,
     HeroDetailLocal::class
-                     ], version = 3)
+                     ], version = 5)
 abstract class HeroDatabase: RoomDatabase() {
     abstract fun heroDao(): HeroDao
     abstract fun heroDetailDao(): HeroDetailDao

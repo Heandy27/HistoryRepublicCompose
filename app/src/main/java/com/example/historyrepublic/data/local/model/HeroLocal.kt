@@ -13,8 +13,9 @@ data class HeroLocal(
     @ColumnInfo("information") val information: String,
     @ColumnInfo("image") val image: String,
     @ColumnInfo("url") val url: String,
+    @ColumnInfo("latitude") val latitude: Double,
     @ColumnInfo("longitude") val longitude: Double,
-    @ColumnInfo("latitude") val latitude: Double
+
 )
 
 fun List<HeroLocal>.toUI(): List<Hero> = this.map {
