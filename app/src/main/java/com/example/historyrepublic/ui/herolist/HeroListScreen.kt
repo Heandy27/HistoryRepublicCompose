@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.historyrepublic.domain.Hero
+import kotlin.math.log
 
 @Composable
 fun HeroListScreen(
@@ -117,7 +118,9 @@ fun HeroListItem_Preview() {
             title = "Queen of Egypt",
             information = "One of the most famous rulers of ancient Egypt.",
             image = "https://historyrepublic.com/wp-content/uploads/2026/01/example.jpg",
-            url = "https://historyrepublic.com/"
+            url = "https://historyrepublic.com/",
+            latitude = -0.1807,
+            longitude = -78.4678
         ),
         onClick = { }
     )
@@ -130,6 +133,8 @@ private fun generateHeros() = (0 until 10).map {
         "Title$it",
         "Information$it",
         "image$it",
-        "Url$it"
+        "Url$it",
+        -0.1807,
+        -78.4678
     )
 }

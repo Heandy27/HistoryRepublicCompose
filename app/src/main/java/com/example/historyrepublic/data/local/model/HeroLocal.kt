@@ -12,7 +12,9 @@ data class HeroLocal(
     @ColumnInfo("title") val title: String,
     @ColumnInfo("information") val information: String,
     @ColumnInfo("image") val image: String,
-    @ColumnInfo("url") val url: String
+    @ColumnInfo("url") val url: String,
+    @ColumnInfo("longitude") val longitude: Double,
+    @ColumnInfo("latitude") val latitude: Double
 )
 
 fun List<HeroLocal>.toUI(): List<Hero> = this.map {
@@ -20,5 +22,5 @@ fun List<HeroLocal>.toUI(): List<Hero> = this.map {
 }
 
 fun HeroLocal.toUI(): Hero = with(this) {
-    Hero(id, nameHero, title, information, image, url)
+    Hero(id, nameHero, title, information, image, url, latitude, longitude)
 }

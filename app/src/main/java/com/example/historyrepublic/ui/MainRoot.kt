@@ -15,7 +15,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.historyrepublic.MainScreen
+import com.example.historyrepublic.domain.Hero
 import com.example.historyrepublic.ui.herodetail.HeroDetailScreen
+import com.example.historyrepublic.ui.map.MapaHeroesScreen
 import com.example.historyrepublic.ui.theme.BottomBarScreenSealed
 import com.example.historyrepublic.ui.theme.NavigationScreenSealed
 
@@ -64,7 +66,7 @@ fun MainRoot() {
 
             // Mapa
             composable(BottomBarScreenSealed.Map.route) {
-                Text("Map Screen mi bro!")
+               MapaHeroesScreen(navController)
             }
 
             // Detalle de heroes

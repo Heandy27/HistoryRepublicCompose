@@ -113,6 +113,11 @@ dependencies {
     androidTestAnnotationProcessor("com.google.dagger:hilt-android-compiler:2.57.2")
 
 
+    // La librería de Compose para Mapas (es la que permite usar el componente GoogleMap)
+    implementation("com.google.maps.android:maps-compose:8.2.0")
+
+    // El SDK base de Google Play Services para Mapas
+    implementation("com.google.android.gms:play-services-maps:20.0.0")
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

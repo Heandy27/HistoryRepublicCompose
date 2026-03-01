@@ -6,5 +6,7 @@ data class Hero(
     val title: String,
     val information: String,
     val image: String,
-    val url: String
+    val url: String,
+    val latitude: Double,
+    val longitude: Double
 )
