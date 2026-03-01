@@ -1,6 +1,5 @@
 package com.example.historyrepublic.ui
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -15,9 +14,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.historyrepublic.MainScreen
-import com.example.historyrepublic.domain.Hero
 import com.example.historyrepublic.ui.herodetail.HeroDetailScreen
-import com.example.historyrepublic.ui.map.MapaHeroesScreen
+import com.example.historyrepublic.ui.map.MapHeroesScreen
 import com.example.historyrepublic.ui.theme.BottomBarScreenSealed
 import com.example.historyrepublic.ui.theme.NavigationScreenSealed
 
@@ -66,7 +64,7 @@ fun MainRoot() {
 
             // Mapa
             composable(BottomBarScreenSealed.Map.route) {
-               MapaHeroesScreen(navController)
+               MapHeroesScreen(navController)
             }
 
             // Detalle de heroes
