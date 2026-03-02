@@ -8,5 +8,6 @@ data class Hero(
     val image: String,
     val url: String,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val youtubeVideo: String
 )

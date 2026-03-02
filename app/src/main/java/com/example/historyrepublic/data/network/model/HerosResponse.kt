@@ -10,7 +10,8 @@ data class HerosResponse(
     val image: String,
     val url: String,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val youtubeVideo: String
 )
 
 fun List<HerosResponse>.toLocal(): List<HeroLocal> = this.map {
@@ -18,5 +19,5 @@ fun List<HerosResponse>.toLocal(): List<HeroLocal> = this.map {
 }
 
 fun HerosResponse.toLocal(): HeroLocal = with(this) {
-    HeroLocal(id, nameHero, title, information, image, url, latitude, longitude)
+    HeroLocal(id, nameHero, title, information, image, url, latitude, longitude, youtubeVideo)
 }

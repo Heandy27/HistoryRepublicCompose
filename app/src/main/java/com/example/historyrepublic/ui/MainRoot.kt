@@ -18,11 +18,12 @@ import com.example.historyrepublic.ui.herodetail.HeroDetailScreen
 import com.example.historyrepublic.ui.map.MapHeroesScreen
 import com.example.historyrepublic.ui.theme.BottomBarScreenSealed
 import com.example.historyrepublic.ui.theme.NavigationScreenSealed
+import com.example.historyrepublic.ui.youtubelist.YoutubeListScreen
 
 @Composable
 fun MainRoot() {
     val navController = rememberNavController()
-    val items = listOf(BottomBarScreenSealed.Home, BottomBarScreenSealed.Map)
+    val items = listOf(BottomBarScreenSealed.Home, BottomBarScreenSealed.Map, BottomBarScreenSealed.Videos)
 
     Scaffold(
         bottomBar = {
@@ -65,6 +66,12 @@ fun MainRoot() {
             // Mapa
             composable(BottomBarScreenSealed.Map.route) {
                MapHeroesScreen(navController)
+            }
+
+            // Videos
+
+            composable(BottomBarScreenSealed.Videos.route) {
+                YoutubeListScreen(navController)
             }
 
             // Detalle de heroes

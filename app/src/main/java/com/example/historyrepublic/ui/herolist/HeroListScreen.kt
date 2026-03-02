@@ -120,7 +120,8 @@ fun HeroListItem_Preview() {
             image = "https://historyrepublic.com/wp-content/uploads/2026/01/example.jpg",
             url = "https://historyrepublic.com/",
             latitude = -0.1807,
-            longitude = -78.4678
+            longitude = -78.4678,
+            youtubeVideo = ""
         ),
         onClick = { }
     )
@@ -135,6 +136,7 @@ private fun generateHeros() = (0 until 10).map {
         "image$it",
         "Url$it",
         -0.1807,
-        -78.4678
+        -78.4678,
+        youtubeVideo = ""
     )
 }

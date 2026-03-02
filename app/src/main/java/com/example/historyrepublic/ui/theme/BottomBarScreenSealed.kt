@@ -3,6 +3,7 @@ package com.example.historyrepublic.ui.theme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomBarScreenSealed(
@@ -20,5 +21,11 @@ sealed class BottomBarScreenSealed(
         route = "map",
         title = "Map",
         icon = Icons.Default.LocationOn
+    )
+
+    object Videos: BottomBarScreenSealed(
+        route = "videos",
+        title = "Videos",
+        icon = Icons.Default.PlayCircle
     )
 }

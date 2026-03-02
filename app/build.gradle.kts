@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -18,6 +20,16 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+
+        // 👇 NUEVA VERSIÓN MÁS LIMPIA PARA KOTLIN 👇
+        val properties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            properties.load(localPropertiesFile.inputStream())
+        }
+
+        manifestPlaceholders["MAPS_API_KEY"] = properties.getProperty("MAPS_API_KEY") ?: ""
+        // 👆 HASTA AQUÍ 👆
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
